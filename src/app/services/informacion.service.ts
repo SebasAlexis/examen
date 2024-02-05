@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Informacion } from '../Informacion';
 
 @Injectable({
@@ -7,19 +8,11 @@ import { Informacion } from '../Informacion';
 })
 
 export class InformacionService {
-  [x: string]: any;
- 
-  URL_API='/api/info';
+  private URL_API = 'http://localhost:3000/api-user';
 
-  informacion:Informacion[]=[];
+  constructor(private http: HttpClient) {}
 
-  selectedInformacion={regulacion_id:'',regulacion:'',url:'',descripcion:'',tipo:'', institucion_emisora:'', registro_oficial_numero:'', registro_oficial_fecha:'',suscripcion:'',archivo:'',modificado:''}
-
-  constructor(private httpclient: HttpClient) {
-    console.log('El servicio Http esta funcionando...')
-  }
-
-  getInfo() {
-    return this.httpclient.get<Informacion[]>(this.URL_API);
+  getInfo(): Observable<Informacion[]> {
+    return this.http.get<Informacion[]>(this.URL_API);
   }
 }
