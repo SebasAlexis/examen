@@ -1,0 +1,32 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Regulaciones</th>
+            <th scope="col">Url</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Institucion Emisora</th>
+            <th scope="col">Registro Oficial Numero</th>
+            <th scope="col">Registro Oficial Fecha</th>
+            <th scope="col">Suscripcion</th>
+            <th scope="col">Archivo</th>
+            <th scope="col">Modificado</th>
+         </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let informacion of informaciones">
+            <th scope="row">{{informacion.regulacion_id}}</th>
+            <td>{{informacion.regulacion}}</td>
+            <td>{{informacion.url}}</td>
+            <td>{{informacion.descripcion}}</td>
+            <td>{{informacion.tipo}}</td>
+            <td>{{informacion.institucion_emisora}}</td>
+            <td>{{informacion.registro_oficial_numero}}</td>
+            <td>{{informacion.registro_oficial_fecha}}</td>
+            <td>{{informacion.suscripcion}}</td>
+            <td>{{informacion.archivo}}</td>
+            <td>{{informacion.modificado}}</td>
+        </tr>
+    </tbody>
+</table>
