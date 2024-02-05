@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InformacionService } from '../../services/informacion.service';
-import { Informacion } from '../../Informacion';
+import { Informacion } from '../../models/Informacion';
 
 @Component({
   selector: 'app-regulaciones',
