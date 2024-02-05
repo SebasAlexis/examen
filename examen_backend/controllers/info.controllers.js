@@ -1,19 +1,27 @@
-const User = require("../models/info");
-const usersController = {};
+// backend/controllers/infoController.js
+const Info = require('../models/info');
 
-usersController.getUsers = async (req, res) => {
-//   res.send("Bienvenido al backend de Gestion de usuarios 2.0");
-  let users = await User.find();
-  console.log(users);
-  return res.status(200).json(users);
+// Controlador para obtener toda la información
+exports.getAllInfo = async (req, res) => {
+    try {
+        const info = await Info.find();
+        res.json(info);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
-usersController.addUser = async (req, res) => {
-//   res.send("Registro de nuevo usuario");
-  const { email, password } = req.body;
-  const newUser = new User({ email: email, password: password });
-  console.log(newUser);
-  await newUser.save();
+// Controlador para obtener un elemento de información por su ID
+exports.getInfoById = async (req, res) => {
+    try {
+        const info = await Info.findById(req.params.id);
+        if (!info) {
+            return res.status(404).json({ message: 'Información no encontrada' });
+        }
+        res.json(info);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
-module.exports = usersController;
+// Otros controladores pueden incluir la creación, actualización y eliminación de la información según sea necesario

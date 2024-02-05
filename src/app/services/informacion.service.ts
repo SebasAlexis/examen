@@ -7,8 +7,9 @@ import { Informacion } from '../Informacion';
 })
 
 export class InformacionService {
+  [x: string]: any;
  
-  URL_API='../assets/info.json';
+  URL_API='/api/info';
 
   informacion:Informacion[]=[];
 
@@ -18,7 +19,7 @@ export class InformacionService {
     console.log('El servicio Http esta funcionando...')
   }
 
-  obtenerDatos() {
+  getInfo() {
     return this.httpclient.get<Informacion[]>(this.URL_API);
   }
 }

@@ -14,7 +14,7 @@ export class RegulacionesComponent implements OnInit {
   constructor(private informacionService: InformacionService) {}
 
   ngOnInit() {
-    this.informacionService.obtenerDatos().subscribe(data => {
+    this.informacionService.getInfo().subscribe(data => {
       this.informaciones = data;
       console.log(this.informaciones);
     });

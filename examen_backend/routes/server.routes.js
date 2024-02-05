@@ -1,13 +1,14 @@
-const { Router } = require("express");
-const router = Router();
-const user = require("../controllers/info.controllers");
-//router.get("/", user.getUsers);
-//router.post("/registro", user.addUser);
+// backend/routes/infoRoutes.js
+const express = require('express');
+const router = express.Router();
+const infoController = require('../controllers/info.controllers');
 
-//router.post('/ingreso',user.loginUser);
-//router.get('/tareas',user.getTasks);
-//router.get('/tareas-privadas',user.geTasksPrivate);
-//router.get('/api-user',user.geTasksPrivate);
+// Ruta para obtener toda la información
+router.get('/', infoController.getAllInfo);
+
+// Ruta para obtener un elemento de información por su ID
+router.get('/:id', infoController.getInfoById);
+
+// Otros endpoints pueden incluir rutas para la creación, actualización y eliminación de información
 
 module.exports = router;
-
