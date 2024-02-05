@@ -8,7 +8,7 @@ import { Informacion } from '../models/Informacion';
 })
 
 export class InformacionService {
-  private URL_API = 'http://localhost:3000/api-user';
+  private URL_API = 'http://localhost:3000/api-info';
 
   constructor(private http: HttpClient) {}
 

@@ -12,8 +12,6 @@ const infoSchema = new Schema({
     suscripcion: String,
     archivo: String,
     modificado: String
-},{
-    timestamps:true
 });
 
 module.exports = model('Info',infoSchema);
