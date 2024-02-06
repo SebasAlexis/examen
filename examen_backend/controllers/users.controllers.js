@@ -1,36 +1,39 @@
-const User = require("../models/user");
-const usersController = {};
+const User = require('../models/user');
 
+const userController = {};
 
-usersController.getUsers = async (req, res) => {
-    res.send("Bienvenido al backend de Gestion de usuarios 2.0");
-    //let users = await User.find();
-    //console.log(users);
-    //return res.status(200).json(users);
-};
+userController.addUser = async (req, res) => {
+  try {
+    const { usuario, email, password } = req.body;
 
-usersController.addUser = async (req, res) => {
-    //res.send("Registro de nuevo usuario");
-    const { email, password } = req.body;
-    const newUser = new User({ email: email, password: password });
-    console.log(newUser);
+    // Verificar el dominio del correo
+    if (!email.endsWith('@ups.edu.ec')) {
+      return res.status(400).json({ success: false, message: 'El correo debe ser de dominio ups.edu.ec' });
+    }
+
+    // Verificar la longitud mínima de la clave
+    if (password.length < 6) {
+      return res.status(400).json({ success: false, message: 'La clave debe tener al menos 6 caracteres' });
+    }
+
+    // Verificar si el usuario ya existe en la base de datos
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ success: false, message: 'El usuario ya existe' });
+    }
+
+    // Crear un nuevo usuario
+    const newUser = new User({ usuario, email, password });
+
+    // Guardar el usuario en la base de datos
     await newUser.save();
-    const token = jwt.sign({
-        _id: newUser._id
-    }, 'secretkey');
-    res.status(200), json({ token });
+
+    // Si llegamos aquí, el registro fue exitoso
+    res.status(201).json({ success: true, message: 'Usuario registrado exitosamente' });
+  } catch (error) {
+    console.error('Error al registrar usuario', error);
+    res.status(500).json({ success: false, message: 'Error interno del servidor' });
+  }
 };
 
-usersController.loginUser = async (req,res) => {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email })
-    if (!user) return
-    res.status(401).send("El correo no existe");
-    if (user.password != password) return
-    res.status(401).send("Clave incorrecta");
-    const
-        token = jwt.sign({ _id: user._id }, 'secretkey');
-    return res.status(200).json({ token });
-}
-
-module.exports = usersController;
+module.exports = userController;

@@ -8,11 +8,12 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegulacionesComponent } from './components/regulaciones/regulaciones.component';
 import { FinalComponent } from './components/final/final.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Route } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
 import { InformacionService } from './services/informacion.service';
+import { UserService } from './services/user.service';
 
 const rutas: Route[] = [
   { path: 'home', component: HomeComponent },
@@ -34,10 +35,11 @@ const rutas: Route[] = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(rutas),
     HttpClientModule
   ],
-  providers: [InformacionService],
+  providers: [InformacionService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
